@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cake Jar Bar – Luxury Mobile Dessert Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:    #F5EDE0;
+    --blush:    #E8C4B0;
+    --rose:     #D4907A;
+    --gold:     #C9A84C;
+    --gold-lt:  #E8CB7E;
+    --brown:    #5C3B24;
+    --choc:     #3A1F10;
+    --nude:     #EDD9C5;
+    --white:    #FDFAF6;
+    --muted:    #A07850;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--choc);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATED HERO ── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+    background: var(--choc);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  /* Photo crossfade (Ken Burns) */
+  .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: reveal 18s infinite, kenburns 18s infinite;
+    will-change: opacity, transform;
+  }
+  .slide:nth-child(1) { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%233A1F10" width="1200" height="800"/><circle cx="30%" cy="30%" r="300" fill="%23C9A84C" opacity="0.1"/><circle cx="80%" cy="70%" r="250" fill="%23D4907A" opacity="0.08"/></svg>'); animation-delay: 0s; }
+  .slide:nth-child(2) { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%235C3B24" width="1200" height="800"/><circle cx="60%" cy="40%" r="280" fill="%23E8CB7E" opacity="0.12"/></svg>'); animation-delay: 6s; }
+  .slide:nth-child(3) { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%232A1208" width="1200" height="800"/><circle cx="40%" cy="60%" r="320" fill="%23C9A84C" opacity="0.1"/></svg>'); animation-delay: 12s; }
+
+  @keyframes reveal {
+    0%, 5.55% { opacity: 0; }
+    11.1%, 88.9% { opacity: 1; }
+    94.45%, 100% { opacity: 0; }
+  }
+  @keyframes kenburns {
+    0%, 100% { transform: scale(1) translateX(0) translateY(0); }
+    50% { transform: scale(1.15) translateX(-2%) translateY(2%); }
+  }
+
+  /* Confetti particles */
+  #confetti {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .sprinkle {
+    position: absolute;
+    top: -10px;
+    opacity: 0.7;
+    animation: fall var(--fall-duration, 8s) linear infinite;
+    --drift: 0;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) translateX(var(--drift));
+      opacity: 0;
+    }
+  }
+
+  /* Overlay content */
+  .hero-overlay {
+    position: relative;
+    z-index: 10;
+    max-width: 620px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+
+  .hero-logo {
+    max-width: min(480px, 90vw);
+    margin-bottom: 20px;
+    animation: slideUp 0.8s ease 0.4s both;
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.1;
+    color: #F2C6D0;
+    margin-bottom: 20px;
+    animation: slideUp 0.8s ease 0.6s both;
+  }
+
+  .hero-description {
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: 500;
+    color: #FFF7EE;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    animation: slideUp 0.8s ease 0.8s both;
+  }
+
+  .occasion {
+    display: inline-block;
+    color: #D9A441;
+    font-style: italic;
+    position: relative;
+  }
+  .occasion .word {
+    display: none;
+  }
+  .occasion .word.active {
+    display: inline;
+    animation: swap 0.35s ease;
+  }
+  @keyframes swap {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 16px 40px;
+    border: 2px solid #D9A441;
+    color: #D9A441;
+    background: rgba(217, 164, 65, 0.08);
+    border-radius: 50px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    animation: slideUp 0.8s ease 1s both;
+  }
+  .hero-cta:hover {
+    background: #D9A441;
+    color: #3B2117;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(217, 164, 65, 0.3);
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .section-rule {
+    width: 48px; height: 1px;
+    background: var(--gold);
+    margin: 20px auto 0;
+    opacity: 0.6;
+  }
+
+  /* ── CART SHOWCASE ── */
+  .cart-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #1C0C04 0%, #2A1208 100%);
+    position: relative;
+  }
+  .cart-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .cart-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media(max-width:768px) { .cart-inner { grid-template-columns: 1fr; } }
+
+  .cart-image-frame {
+    position: relative;
+  }
+  .cart-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .cart-image-frame::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid rgba(201,168,76,0.10);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .cart-image-frame img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    filter: brightness(1.05) contrast(1.05) saturate(1.1);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(201,168,76,0.08);
+  }
+
+  /* gold corner accents */
+  .corner { position: absolute; width: 24px; height: 24px; }
+  .corner-tl { top: -12px; left: -12px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-tr { top: -12px; right: -12px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .corner-bl { bottom: -12px; left: -12px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-br { bottom: -12px; right: -12px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+  .cart-copy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 50px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--cream);
+  }
+  .cart-copy h2 em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+  .cart-copy p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--blush);
+    margin-bottom: 32px;
+    max-width: 420px;
+  }
+
+  .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--nude);
+    letter-spacing: 0.04em;
+  }
+  .feat-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.35);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  /* ── JARS SECTION ── */
+  .jars-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #2A1208 0%, #1C0C04 100%);
+    text-align: center;
+  }
+  .jars-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media(max-width:600px) { .jars-grid { grid-template-columns: 1fr; } }
+
+  .jar-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 28px 20px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .jar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.1);
+  }
+  .jar-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .jar-num {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .jar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .jar-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── MENU BOARD ── */
+  .menu-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #1C0C04 0%, #0F0603 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-section::before {
+    content: '✦';
+    position: absolute;
+    font-size: 400px;
+    color: rgba(201,168,76,0.03);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .menu-board {
+    max-width: 760px;
+    margin: 0 auto;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    padding: 56px 48px;
+    background: linear-gradient(160deg, rgba(201,168,76,0.06), rgba(92,59,36,0.08));
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
+  }
+  /* LED glow strip at top */
+  .menu-board::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.8), rgba(232,203,126,1), rgba(201,168,76,0.8), transparent);
+    box-shadow: 0 0 20px 4px rgba(201,168,76,0.4);
+  }
+
+  .menu-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 40px);
+    text-align: center;
+    color: var(--gold-lt);
+    margin-bottom: 8px;
+  }
+  .menu-subtitle {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .menu-divider {
+    border: none;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    margin: 28px 0;
+  }
+
+  .menu-category {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .menu-item-line {
+    flex: 1;
+    border-bottom: 1px dotted rgba(201,168,76,0.2);
+    margin-bottom: 3px;
+  }
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--cream);
+  }
+  .menu-item-note {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+    margin-left: 8px;
+  }
+  .menu-item-price {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  /* ── EVENTS ── */
+  .events-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #0F0603 0%, #1C0C04 100%);
+  }
+  .events-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .event-card {
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px;
+    padding: 36px 28px;
+    text-align: center;
+    background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(0,0,0,0.1));
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .event-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    background: linear-gradient(160deg, rgba(201,168,76,0.06), rgba(0,0,0,0.1));
+  }
+  .event-icon { font-size: 32px; margin-bottom: 16px; }
+  .event-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .event-desc { font-size: 11px; color: var(--muted); line-height: 1.7; }
+
+  /* ── EXPERIENCE BAR ── */
+  .xp-section {
+    padding: 80px 24px;
+    background: linear-gradient(135deg, #3A1F10 0%, #5C3B24 50%, #3A1F10 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .xp-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0;
+  }
+  .xp-item {
+    text-align: center;
+    padding: 28px 20px;
+    border-right: 1px solid rgba(201,168,76,0.15);
+  }
+  .xp-item:last-child { border-right: none; }
+  .xp-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--gold-lt);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .xp-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── BACKDROP / SOCIAL ── */
+  .social-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #1C0C04 0%, #2A1208 100%);
+    text-align: center;
+  }
+  .backdrop-frame {
+    max-width: 700px;
+    margin: 0 auto 48px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 12px;
+    padding: 60px 40px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      linear-gradient(160deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+    position: relative;
+    overflow: hidden;
+  }
+  .backdrop-frame::after {
+    content: '✦ THE CAKE JAR BAR ✦';
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: rgba(201,168,76,0.4);
+    white-space: nowrap;
+  }
+  .backdrop-hashtag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 56px);
+    font-style: italic;
+    color: var(--gold-lt);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  .backdrop-tagline {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-bottom: 32px;
+  }
+  .social-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 12px 28px;
+    border-radius: 40px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0A0300;
+    padding: 56px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .footer-logo img {
+    max-width: 260px;
+    opacity: 0.85;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 2px 12px rgba(201,168,76,0.2));
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .footer-meta {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(160,120,80,0.4);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">A Luxury Mobile Dessert Experience</div>
+
+  <div class="logo-wrap">
+    <img src="/mnt/user-data/uploads/4810d908dbdfd00b23ad5035f244ba4b512ddeb9.png" alt="The Cake Jar Bar by Upscale Cakes LLC">
+  </div>
+
+  <p class="hero-sub">
+    Handcrafted gourmet cake jars, elegantly served from our stunning mobile dessert cart — the sweetest statement at any celebration.
+  </p>
+
+  <div class="hero-divider">
+    <span></span>
+    <div class="diamond"></div>
+    <span></span>
+  </div>
+
+  <div class="hero-tags">
+    <span class="tag">Weddings</span>
+    <span class="tag">Baby Showers</span>
+    <span class="tag">Corporate Events</span>
+    <span class="tag">Birthdays</span>
+    <span class="tag">Church Events</span>
+    <span class="tag">Rooftop Soirées</span>
+  </div>
+</section>
+
+<!-- ── CART SHOWCASE ── -->
+<section class="cart-section">
+  <div class="section-header">
+    <span class="section-eyebrow">The Experience</span>
+    <h2 class="section-title">Our Signature<br>Mobile Dessert Cart</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cart-inner">
+    <div class="cart-image-frame">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <img src="/mnt/user-data/uploads/0b8175dd46c8ec227eb440dc0d92f1f8d7332f6d.png" alt="The Cake Jar Bar Mobile Cart">
+    </div>
+
+    <div class="cart-copy">
+      <h2>Where <em>Luxury</em><br>Meets Sweetness</h2>
+      <p>
+        Our beautifully appointed mobile dessert cart arrives dressed for the occasion — complete with an elegant toppings station, signature cake jar display, and a curated experience your guests will be talking about long after the last bite.
+      </p>
+      <ul class="features-list">
+        <li>
+          <div class="feat-icon">✦</div>
+          Custom cake jar display wall with tiered stand
+        </li>
+        <li>
+          <div class="feat-icon">✦</div>
+          Decorative toppings station with 12+ premium options
+        </li>
+        <li>
+          <div class="feat-icon">✦</div>
+          LED illuminated menu board
+        </li>
+        <li>
+          <div class="feat-icon">✦</div>
+          Premium branded packaging & presentation
+        </li>
+        <li>
+          <div class="feat-icon">✦</div>
+          Social media photo backdrop included
+        </li>
+        <li>
+          <div class="feat-icon">✦</div>
+          Elegant signage & full luxury styling
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAKE JARS ── -->
+<section class="jars-section">
+  <div class="section-header">
+    <span class="section-eyebrow">Our Signature Flavors</span>
+    <h2 class="section-title">The Jar Collection</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="jars-grid">
+    <div class="jar-card">
+      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
+      <div class="jar-num">No. 01</div>
+      <div class="jar-name">Strawberry Dream</div>
+      <div class="jar-desc">Vanilla cake layered with fresh strawberry frosting & berry compote</div>
+    </div>
+    <div class="jar-card">
+      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
+      <div class="jar-num">No. 02</div>
+      <div class="jar-name">Confetti Celebration</div>
+      <div class="jar-desc">Funfetti cake with whipped vanilla cream & rainbow sprinkle finish</div>
+    </div>
+    <div class="jar-card">
+      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
+      <div class="jar-num">No. 03</div>
+      <div class="jar-name">Ocean Blueberry</div>
+      <div class="jar-desc">Blue velvet cake with blueberry frosting & cream cheese swirl</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU BOARD ── -->
+<section class="menu-section">
+  <div class="section-header">
+    <span class="section-eyebrow">LED Menu Board</span>
+    <h2 class="section-title">Tonight's Selection</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="menu-board">
+    <div class="menu-title">The Cake Jar Bar</div>
+    <div class="menu-subtitle">by Upscale Cakes LLC &nbsp;·&nbsp; Gourmet Cake Jars</div>
+
+    <div class="menu-category">Signature Classics</div>
+
+    <div class="menu-item">
+      <span class="menu-item-name">Strawberry Dream <span class="menu-item-note">fan favorite</span></span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$12</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item-name">Confetti Celebration</span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$12</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item-name">Ocean Blueberry Velvet</span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$12</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item-name">Classic Red Velvet</span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$12</span>
+    </div>
+
+    <hr class="menu-divider">
+
+    <div class="menu-category">Premium Selections</div>
+
+    <div class="menu-item">
+      <span class="menu-item-name">Gold Caramel Drizzle <span class="menu-item-note">chef's choice</span></span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$15</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item-name">Chocolate Lava Royale</span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$15</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item-name">Champagne Rose Velvet</span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">$15</span>
+    </div>
+
+    <hr class="menu-divider">
+
+    <div class="menu-category">Custom & Seasonal</div>
+
+    <div class="menu-item">
+      <span class="menu-item-name">Bespoke Event Flavor <span class="menu-item-note">inquire</span></span>
+      <div class="menu-item-line"></div>
+      <span class="menu-item-price">MKT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<section class="xp-section">
+  <div class="xp-grid">
+    <div class="xp-item">
+      <div class="xp-num">12+</div>
+      <div class="xp-label">Signature Flavors</div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-num">100%</div>
+      <div class="xp-label">Handcrafted</div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-num">∞</div>
+      <div class="xp-label">Custom Options</div>
+    </div>
+    <div class="xp-item">
+      <div class="xp-num">5★</div>
+      <div class="xp-label">Event Experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ── -->
+<section class="events-section">
+  <div class="section-header">
+    <span class="section-eyebrow">We Specialize In</span>
+    <h2 class="section-title">Every Celebration,<br>Elevated</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-icon">💍</div>
+      <div class="event-name">Weddings</div>
+      <div class="event-desc">An unforgettable dessert moment for your most important day</div>
+    </div>
+    <div class="event-card">
+      <div class="event-icon">👶</div>
+      <div class="event-name">Baby Showers</div>
+      <div class="event-desc">Sweet flavors to celebrate your newest arrival in style</div>
+    </div>
+    <div class="event-card">
+      <div class="event-icon">🎂</div>
+      <div class="event-name">Birthdays</div>
+      <div class="event-desc">Make it a milestone with custom flavors & premium presentation</div>
+    </div>
+    <div class="event-card">
+      <div class="event-icon">💼</div>
+      <div class="event-name">Corporate</div>
+      <div class="event-desc">Impress clients & colleagues with luxury branded desserts</div>
+    </div>
+    <div class="event-card">
+      <div class="event-icon">⛪</div>
+      <div class="event-name">Church Events</div>
+      <div class="event-desc">Community gatherings made sweeter with our mobile cart</div>
+    </div>
+    <div class="event-card">
+      <div class="event-icon">🌹</div>
+      <div class="event-name">Luxury Soirées</div>
+      <div class="event-desc">Rooftop events, galas & private parties — we set the scene</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL BACKDROP ── -->
+<section class="social-section">
+  <div class="section-header">
+    <span class="section-eyebrow">Photo Backdrop</span>
+    <h2 class="section-title">Made for the 'Gram</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="backdrop-frame">
+    <div class="backdrop-hashtag">#TheCakeJarBar</div>
+    <div class="backdrop-tagline">Gourmet · Handcrafted · Unforgettable</div>
+    <div class="social-handle">
+      <span>✦</span>
+      <span>@UpscaleCakesLLC</span>
+      <span>✦</span>
+    </div>
+  </div>
+
+  <p style="font-size:12px; color: var(--muted); max-width:480px; margin:0 auto; line-height:1.8; font-style:italic;">
+    "Our signature photo backdrop turns every dessert moment into a branded memory — Pinterest-worthy, Instagram-ready, and uniquely yours."
+  </p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="/mnt/user-data/uploads/4810d908dbdfd00b23ad5035f244ba4b512ddeb9.png" alt="The Cake Jar Bar Logo">
+  </div>
+  <div class="footer-tagline">Luxury Cake Jars · Mobile Dessert Cart · Custom Events</div>
+  <div class="footer-meta">© 2026 Upscale Cakes LLC &nbsp;·&nbsp; The Cake Jar Bar &nbsp;·&nbsp; All Rights Reserved</div>
+</footer>
+
+</body>
+</html>
