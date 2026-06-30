@@ -404,56 +404,269 @@
     font-size: 13px;
   }
 
-  /* ── JARS SECTION ── */
-  .jars-section {
+  /* ── SERVICES SECTION ── */
+  .services-section {
     padding: 100px 24px;
     background: linear-gradient(180deg, #2A1208 0%, #1C0C04 100%);
     text-align: center;
   }
-  .jars-grid {
-    max-width: 900px;
+
+  .services-grid {
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-bottom: 60px;
   }
-  @media(max-width:600px) { .jars-grid { grid-template-columns: 1fr; } }
 
-  .jar-card {
+  .service-card {
     position: relative;
     background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
     border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 8px;
-    padding: 28px 20px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 12px;
+    padding: 40px 32px;
+    text-align: left;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   }
-  .jar-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.1);
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 70px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.12);
+    border-color: rgba(201,168,76,0.45);
   }
-  .jar-card img {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    display: block;
-  }
-  .jar-num {
-    font-size: 9px;
+
+  .service-badge {
+    display: inline-block;
+    font-size: 8px;
     letter-spacing: 0.35em;
-    color: var(--gold);
     text-transform: uppercase;
+    color: #FFB347;
+    background: rgba(255,179,71,0.12);
+    border: 1px solid rgba(255,179,71,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold-lt);
+    margin-bottom: 20px;
+  }
+
+  .service-price-sub {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .service-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+  .service-features li {
+    font-size: 12px;
+    color: var(--nude);
+    line-height: 1.8;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .service-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .service-highlight {
+    background: rgba(201,168,76,0.08);
+    border-left: 2px solid var(--gold);
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--gold-lt);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* Add-Ons Grid */
+  .addons-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 80px;
+    padding-top: 60px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .addon-card {
+    background: linear-gradient(160deg, rgba(212,144,122,0.06), rgba(92,59,36,0.06));
+    border: 1px solid rgba(212,144,122,0.25);
+    border-radius: 12px;
+    padding: 36px 28px;
+    text-align: left;
+    transition: all 0.4s ease;
+  }
+  .addon-card:hover {
+    background: linear-gradient(160deg, rgba(212,144,122,0.12), rgba(92,59,36,0.12));
+    border-color: rgba(212,144,122,0.5);
+    transform: translateY(-4px);
+  }
+
+  .addon-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .addon-desc {
+    font-size: 12px;
+    color: var(--blush);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+
+  .addon-features {
+    list-style: none;
+    font-size: 11px;
+    color: var(--nude);
+    line-height: 1.7;
+  }
+  .addon-features li {
+    padding-left: 18px;
+    position: relative;
     margin-bottom: 8px;
   }
-  .jar-name {
+  .addon-features li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--rose);
+    font-size: 8px;
+  }
+
+  /* Cake Jar Bundles */
+  .bundles-section {
+    max-width: 1000px;
+    margin: 80px auto 0;
+    padding: 60px 40px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    background: linear-gradient(160deg, rgba(201,168,76,0.04), rgba(0,0,0,0.1));
+  }
+
+  .bundles-header h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: 28px;
     color: var(--cream);
     margin-bottom: 8px;
   }
-  .jar-desc {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.7;
+
+  .bundles-tagline {
+    font-size: 13px;
+    color: var(--blush);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .bundle-pricing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  @media(max-width:600px) { .bundle-pricing { grid-template-columns: 1fr; } }
+
+  .pricing-item {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .pricing-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .pricing-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold-lt);
+    line-height: 1;
+  }
+
+  .bundles-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  @media(max-width:768px) { .bundles-details { grid-template-columns: 1fr; } }
+
+  .bundles-details h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .bundles-details ul {
+    list-style: none;
+    font-size: 12px;
+    color: var(--nude);
+    line-height: 1.9;
+  }
+  .bundles-details li {
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .bundles-details li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--rose);
+  }
+
+  .bundles-why {
+    margin-top: 32px;
+    padding: 24px;
+    background: rgba(212,144,122,0.08);
+    border-left: 3px solid var(--rose);
+    border-radius: 4px;
+  }
+  .bundles-why p {
+    font-size: 12px;
+    color: var(--nude);
+    line-height: 1.8;
   }
 
   /* ── MENU BOARD ── */
@@ -793,32 +1006,174 @@
   </div>
 </section>
 
-<!-- ── CAKE JARS ── -->
-<section class="jars-section">
+<!-- ── SERVICES & PRICING ── -->
+<section class="services-section">
   <div class="section-header">
-    <span class="section-eyebrow">Our Signature Flavors</span>
-    <h2 class="section-title">The Jar Collection</h2>
+    <span class="section-eyebrow">Our Offerings</span>
+    <h2 class="section-title">Service Packages &<br>Pricing</h2>
     <div class="section-rule"></div>
   </div>
 
-  <div class="jars-grid">
-    <div class="jar-card">
-      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
-      <div class="jar-num">No. 01</div>
-      <div class="jar-name">Strawberry Dream</div>
-      <div class="jar-desc">Vanilla cake layered with fresh strawberry frosting & berry compote</div>
+  <div class="services-grid">
+    <!-- Signature Experience -->
+    <div class="service-card">
+      <span class="service-badge">Soft Launch Price</span>
+      <h3 class="service-title">Signature Experience</h3>
+      <div class="service-price">$675</div>
+      <div class="service-price-sub">First 3 Events Only</div>
+      <ul class="service-features">
+        <li>Up to 60 guests</li>
+        <li>1 Cake Jar per guest</li>
+        <li>2-3 hour service window</li>
+        <li>Build Your Own Cake Jar Station</li>
+        <li>Toppings Bar</li>
+        <li>Branded setup</li>
+      </ul>
+      <div class="service-highlight">
+        <strong>After Launch:</strong> $875–$1,200
+      </div>
     </div>
-    <div class="jar-card">
-      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
-      <div class="jar-num">No. 02</div>
-      <div class="jar-name">Confetti Celebration</div>
-      <div class="jar-desc">Funfetti cake with whipped vanilla cream & rainbow sprinkle finish</div>
+
+    <!-- Premium Event Experience -->
+    <div class="service-card">
+      <span class="service-badge">Most Popular</span>
+      <h3 class="service-title">Premium Event Experience</h3>
+      <div class="service-price">$875–$1,200</div>
+      <div class="service-price-sub">Per Event</div>
+      <ul class="service-features">
+        <li>60 guests minimum</li>
+        <li>5 hour service window</li>
+        <li>1 Cake Jar per guest</li>
+        <li>Build Your Own Cake Jar Station</li>
+        <li>Event-themed menu</li>
+        <li>Styled display</li>
+      </ul>
+      <div class="service-highlight">
+        Premium presentation & full event styling
+      </div>
     </div>
-    <div class="jar-card">
-      <img src="/mnt/user-data/uploads/5a4cbf93aaa87fc8f73fb1c2eb227464cd6cbccc.png" alt="Cake Jars by Upscale Cakes">
-      <div class="jar-num">No. 03</div>
-      <div class="jar-name">Ocean Blueberry</div>
-      <div class="jar-desc">Blue velvet cake with blueberry frosting & cream cheese swirl</div>
+
+    <!-- Unlimited Experience -->
+    <div class="service-card">
+      <span class="service-badge">Premium</span>
+      <h3 class="service-title">Unlimited Experience</h3>
+      <div class="service-price">$1,700–$2,000</div>
+      <div class="service-price-sub">Per Event</div>
+      <ul class="service-features">
+        <li>Up to 60 guests included</li>
+        <li>Unlimited jars during service</li>
+        <li>Premium toppings selection</li>
+        <li>Event-specific creations</li>
+        <li>Priority booking</li>
+      </ul>
+      <div class="service-highlight">
+        Maximum flexibility & indulgence
+      </div>
+    </div>
+  </div>
+
+  <!-- Add-Ons Section -->
+  <div class="addons-section">
+    <div class="section-header" style="margin-bottom: 48px;">
+      <span class="section-eyebrow">Enhance Your Experience</span>
+      <h2 class="section-title">Custom Add-Ons</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="addons-grid">
+      <!-- Party Favor Packaging -->
+      <div class="addon-card">
+        <h4 class="addon-title">Party Favor Packaging</h4>
+        <p class="addon-desc">
+          Turn your guests' cake jars into beautiful take-home favors.
+        </p>
+        <ul class="addon-features">
+          <li>Decorative packaging</li>
+          <li>Custom stickers</li>
+          <li>Event personalization</li>
+        </ul>
+      </div>
+
+      <!-- Custom Event Styling -->
+      <div class="addon-card">
+        <h4 class="addon-title">Custom Event Styling</h4>
+        <p class="addon-desc">
+          Fully themed cake jar bar matched to your event aesthetic.
+        </p>
+        <ul class="addon-features">
+          <li>Color-coordinated display</li>
+          <li>Themed menu board</li>
+          <li>Custom signage</li>
+        </ul>
+      </div>
+
+      <!-- Photo Backdrop -->
+      <div class="addon-card">
+        <h4 class="addon-title">Instagram-Ready Backdrop</h4>
+        <p class="addon-desc">
+          Branded photo moment perfect for your event memories.
+        </p>
+        <ul class="addon-features">
+          <li>Professional backdrop setup</li>
+          <li>Custom branding</li>
+          <li>Hashtag integration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cake Jar Bundles Section -->
+  <div class="bundles-section">
+    <div class="bundles-header">
+      <h3>Cake Jar Bundles</h3>
+      <p class="bundles-tagline">
+        Perfect for intimate celebrations, family gatherings, girls' nights, office parties, baby showers, and special occasions.
+      </p>
+    </div>
+
+    <div class="bundle-pricing">
+      <div class="pricing-item">
+        <div class="pricing-label">Standard Cake Jars</div>
+        <div class="pricing-amount">$15</div>
+        <div class="pricing-label" style="margin-top: 4px;">per jar (min. 10)</div>
+      </div>
+      <div class="pricing-item">
+        <div class="pricing-label">Custom Cake Jars</div>
+        <div class="pricing-amount">$22</div>
+        <div class="pricing-label" style="margin-top: 4px;">per jar (min. 10)</div>
+      </div>
+    </div>
+
+    <div class="bundles-details">
+      <div>
+        <h4>What's Included</h4>
+        <ul>
+          <li>Individually packaged cake jars</li>
+          <li>Themed gift bags</li>
+          <li>Custom event labels</li>
+          <li>Coordinated presentation</li>
+          <li>Ready-to-gift packaging</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Perfect For</h4>
+        <ul>
+          <li>Birthday Celebrations</li>
+          <li>Bridal Showers</li>
+          <li>Baby Showers</li>
+          <li>Family Gatherings</li>
+          <li>Holiday Parties</li>
+          <li>Girls' Night In</li>
+          <li>Office Events</li>
+          <li>Small Business Events</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bundles-why">
+      <p>
+        <strong>Why Clients Love It:</strong> Skip the hassle of purchasing separate party favors and desserts. Our custom cake jars serve as both a delicious dessert and a memorable take-home gift for your guests.
+      </p>
     </div>
   </div>
 </section>
