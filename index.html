@@ -735,37 +735,38 @@
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+    margin-top: 28px;
+  }
+  .menu-category:first-of-type {
+    margin-top: 0;
   }
 
-  .menu-item {
+  .flavor-list {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 16px;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 28px;
   }
-  .menu-item-line {
-    flex: 1;
-    border-bottom: 1px dotted rgba(201,168,76,0.2);
-    margin-bottom: 3px;
-  }
-  .menu-item-name {
+
+  .flavor-item {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-size: 20px;
     color: var(--cream);
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    line-height: 1.3;
   }
-  .menu-item-note {
-    font-size: 10px;
-    color: var(--muted);
+  .flavor-item:last-child {
+    border-bottom: none;
+  }
+
+  .custom-note {
+    font-size: 12px;
+    color: var(--blush);
+    line-height: 1.7;
     font-style: italic;
-    margin-left: 8px;
-  }
-  .menu-item-price {
-    font-size: 13px;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    white-space: nowrap;
+    margin-top: 20px;
   }
 
   /* ── EVENTS ── */
@@ -1181,8 +1182,8 @@
 <!-- ── MENU BOARD ── -->
 <section class="menu-section">
   <div class="section-header">
-    <span class="section-eyebrow">LED Menu Board</span>
-    <h2 class="section-title">Tonight's Selection</h2>
+    <span class="section-eyebrow">Flavor Selection</span>
+    <h2 class="section-title">Gourmet Cake Jar Flavors</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1190,58 +1191,23 @@
     <div class="menu-title">The Cake Jar Bar</div>
     <div class="menu-subtitle">by Upscale Cakes LLC &nbsp;·&nbsp; Gourmet Cake Jars</div>
 
-    <div class="menu-category">Signature Classics</div>
+    <div class="menu-category">Signature Flavors</div>
 
-    <div class="menu-item">
-      <span class="menu-item-name">Strawberry Dream <span class="menu-item-note">fan favorite</span></span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$12</span>
-    </div>
-    <div class="menu-item">
-      <span class="menu-item-name">Confetti Celebration</span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$12</span>
-    </div>
-    <div class="menu-item">
-      <span class="menu-item-name">Ocean Blueberry Velvet</span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$12</span>
-    </div>
-    <div class="menu-item">
-      <span class="menu-item-name">Classic Red Velvet</span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$12</span>
+    <div class="flavor-list">
+      <div class="flavor-item">Confetti Cake</div>
+      <div class="flavor-item">Pink Party Cake</div>
+      <div class="flavor-item">Blue Velvet</div>
+      <div class="flavor-item">Red Velvet</div>
+      <div class="flavor-item">Strawberries and Cream</div>
+      <div class="flavor-item">Coconut Cream</div>
+      <div class="flavor-item">Pina Colada</div>
+      <div class="flavor-item">Chocolate Dream</div>
     </div>
 
     <hr class="menu-divider">
 
-    <div class="menu-category">Premium Selections</div>
-
-    <div class="menu-item">
-      <span class="menu-item-name">Gold Caramel Drizzle <span class="menu-item-note">chef's choice</span></span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$15</span>
-    </div>
-    <div class="menu-item">
-      <span class="menu-item-name">Chocolate Lava Royale</span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$15</span>
-    </div>
-    <div class="menu-item">
-      <span class="menu-item-name">Champagne Rose Velvet</span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">$15</span>
-    </div>
-
-    <hr class="menu-divider">
-
-    <div class="menu-category">Custom & Seasonal</div>
-
-    <div class="menu-item">
-      <span class="menu-item-name">Bespoke Event Flavor <span class="menu-item-note">inquire</span></span>
-      <div class="menu-item-line"></div>
-      <span class="menu-item-price">MKT</span>
-    </div>
+    <div class="menu-category">Custom Creations</div>
+    <p class="custom-note">Custom flavors can be created specifically for your preferences and event</p>
   </div>
 </section>
 
