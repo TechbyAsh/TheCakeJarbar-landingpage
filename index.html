@@ -803,35 +803,186 @@
   }
   .event-desc { font-size: 11px; color: var(--muted); line-height: 1.7; }
 
-  /* ── EXPERIENCE BAR ── */
-  .xp-section {
-    padding: 80px 24px;
-    background: linear-gradient(135deg, #3A1F10 0%, #5C3B24 50%, #3A1F10 100%);
-    border-top: 1px solid rgba(201,168,76,0.15);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
+  /* ── WORK WITH US / PROCESS ── */
+  .process-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, #1C0C04 0%, #0F0603 100%);
+    position: relative;
+    overflow: hidden;
   }
-  .xp-grid {
-    max-width: 900px;
+
+  .process-container {
+    max-width: 1000px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 0;
   }
-  .xp-item {
-    text-align: center;
-    padding: 28px 20px;
-    border-right: 1px solid rgba(201,168,76,0.15);
+
+  .process-carousel {
+    position: relative;
+    background: linear-gradient(160deg, rgba(201,168,76,0.05), rgba(92,59,36,0.08));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 60px 48px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
   }
-  .xp-item:last-child { border-right: none; }
-  .xp-num {
+
+  .process-slide {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    position: absolute;
+    inset: 60px 48px;
+  }
+
+  .process-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+    inset: auto;
+  }
+
+  .process-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  @media(max-width:768px) {
+    .process-step {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  .step-number {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 300;
     color: var(--gold-lt);
+    min-width: 80px;
     line-height: 1;
-    margin-bottom: 8px;
   }
-  .xp-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+
+  .step-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+    color: var(--blush);
+    line-height: 1.8;
+    max-width: 500px;
+  }
+
+  /* Process dots/indicators */
+  .process-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 48px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+
+  .dot.active {
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(201,168,76,0.6);
+    transform: scale(1.2);
+  }
+
+  .dot:hover {
+    background: rgba(201,168,76,0.5);
+  }
+
+  /* Navigation arrows */
+  .carousel-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.35);
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(201,168,76,0.15);
+    border-color: rgba(201,168,76,0.6);
+    transform: scale(1.1);
+  }
+
+  .carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .slide-counter {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* CTA Button */
+  .process-cta-wrap {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 18px 48px;
+    background: linear-gradient(135deg, #C9A84C, #E8CB7E);
+    color: #3A1F10;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 12px 32px rgba(201,168,76,0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(201,168,76,0.5);
+    background: linear-gradient(135deg, #E8CB7E, #C9A84C);
+  }
+
+  .cta-subtext {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    letter-spacing: 0.1em;
+  }
 
   /* ── BACKDROP / SOCIAL ── */
   .social-section {
@@ -1211,27 +1362,168 @@
   </div>
 </section>
 
-<!-- ── STATS BAR ── -->
-<section class="xp-section">
-  <div class="xp-grid">
-    <div class="xp-item">
-      <div class="xp-num">12+</div>
-      <div class="xp-label">Signature Flavors</div>
+<!-- ── WORK WITH US / BOOKING PROCESS ── -->
+<section class="process-section">
+  <div class="section-header">
+    <span class="section-eyebrow">Ready to Celebrate?</span>
+    <h2 class="section-title">Work With Us</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="process-container">
+    <div class="process-carousel">
+      <!-- SLIDE 1: Inquiry -->
+      <div class="process-slide active">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Fill Out an Inquiry Form</h3>
+            <p>
+              Tell us about your event, guest count, preferred dates, and any special requests. We'll review all the details to ensure we're the perfect fit for your celebration.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Contact & Consultation -->
+      <div class="process-slide">
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>We Reach Out & Discuss Details</h3>
+            <p>
+              We'll contact you via your preferred method — phone call, email, or text. We'll discuss the specifics of your event, including your unique flavor preferences, topping selections, and any custom designs you want to add to your jars.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Deposit & Secure Date -->
+      <div class="process-slide">
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>Leave a Deposit to Secure Your Date</h3>
+            <p>
+              Once you're ready to move forward, a deposit will secure your event date on our calendar. This ensures your celebration is locked in and our team can begin planning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Custom Sample -->
+      <div class="process-slide">
+        <div class="process-step">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <h3>Receive Custom Sample & Approval</h3>
+            <p>
+              For custom packages, we'll send you a picture sample of your designs 2 weeks before your event. Review and approve to make sure everything is exactly as you envisioned it.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Celebrate -->
+      <div class="process-slide">
+        <div class="process-step">
+          <div class="step-number">05</div>
+          <div class="step-content">
+            <h3>Celebrate With Your Guests</h3>
+            <p>
+              Get ready to celebrate! We'll arrive with our fully loaded cake jar bar, craft and package custom cake jars on-site, and add a fun and interactive dessert experience to your event. Your guests leave with tasty take-homes!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicators & Navigation -->
+      <div class="carousel-nav">
+        <button class="carousel-btn prev-btn" onclick="prevSlide()">←</button>
+        
+        <div class="process-indicators" id="indicatorsContainer">
+          <!-- Dots will be generated by JavaScript -->
+        </div>
+        
+        <button class="carousel-btn next-btn" onclick="nextSlide()">→</button>
+      </div>
+
+      <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">5</span>
+      </div>
     </div>
-    <div class="xp-item">
-      <div class="xp-num">100%</div>
-      <div class="xp-label">Handcrafted</div>
-    </div>
-    <div class="xp-item">
-      <div class="xp-num">∞</div>
-      <div class="xp-label">Custom Options</div>
-    </div>
-    <div class="xp-item">
-      <div class="xp-num">5★</div>
-      <div class="xp-label">Event Experience</div>
+
+    <!-- CTA Button -->
+    <div class="process-cta-wrap">
+      <button class="cta-button" onclick="scrollToInquiryForm()">Start Your Inquiry</button>
+      <p class="cta-subtext">Let's create your unforgettable dessert experience</p>
     </div>
   </div>
 </section>
+
+<script>
+  let currentSlideIndex = 0;
+  const totalSlides = 5;
+
+  function initCarousel() {
+    const container = document.getElementById('indicatorsContainer');
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goToSlide(i);
+      container.appendChild(dot);
+    }
+  }
+
+  function showSlide(index) {
+    const slides = document.querySelectorAll('.process-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Wrap around
+    if (index >= totalSlides) currentSlideIndex = 0;
+    if (index < 0) currentSlideIndex = totalSlides - 1;
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+    
+    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+    
+    // Update button states
+    document.querySelector('.prev-btn').disabled = currentSlideIndex === 0;
+    document.querySelector('.next-btn').disabled = currentSlideIndex === totalSlides - 1;
+  }
+
+  function nextSlide() {
+    currentSlideIndex++;
+    if (currentSlideIndex >= totalSlides) currentSlideIndex = totalSlides - 1;
+    showSlide(currentSlideIndex);
+  }
+
+  function prevSlide() {
+    currentSlideIndex--;
+    if (currentSlideIndex < 0) currentSlideIndex = 0;
+    showSlide(currentSlideIndex);
+  }
+
+  function goToSlide(index) {
+    currentSlideIndex = index;
+    showSlide(currentSlideIndex);
+  }
+
+  function scrollToInquiryForm() {
+    // This will scroll to an inquiry form section (you can add it later)
+    alert('Inquiry form section coming soon!');
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    initCarousel();
+    showSlide(currentSlideIndex);
+  });
+</script>
 
 <!-- ── EVENTS ── -->
 <section class="events-section">
